@@ -1,0 +1,179 @@
+<!-- <div ng-if="!main.loggedIn">
+	
+	<div>
+		<h1>If you have wanna meet Sign up!</h1>
+	</div>
+
+	<div>
+		<p>Login to create a event </p>
+		<a href="/login" class="btn btn-primary">Login</a>
+	</div>
+</div> -->
+
+
+<!-- <div class="card large" ng-if="!main.loggedIn" style="margin-top:30px;">
+
+	<div class="container">
+
+		<div class="row">
+			<h1 class="thin grey-text text-darken-1"> Want to meet people ? </h1>
+			<div style="margin-left: 170px; margin-top: 35px;">
+				<a href="/signup" class="btn btn-primary btn-large waves-effect waves-light red"><i class="material-icons right">input</i>Sign Up</a>
+			</div>
+		</div>
+
+		<div class="row">
+			
+			<div class="row">
+				<h1 class="thin grey-text text-darken-1"> Login to create an event </h1>
+				<div style="margin-left: 190px; margin-top: 35px;">
+					<a href="/login" class="btn btn-primary btn-large waves-effect waves-light green"><i class="mdi-content-send right"></i>Login</a>
+				</div>
+			</div>
+		</div>
+	 
+	</div>
+
+</div>
+ -->
+<style type="text/css">
+	.search_slider {
+		position: absolute;
+		z-index: 20;
+		top: 60%;
+		left: 10%;
+		width: 1100px;
+	}
+
+	input {
+    -webkit-appearance: textfield;
+    padding: 1px;
+    background-color: white;
+    border: 2px inset;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    cursor: auto;
+}
+
+.search .search-wrapper input#search {
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    width: 100%;
+    height: 45px;
+    padding: 0 45px 0 15px;
+    border: 0;
+}
+
+::-webkit-input-placeholder {
+   color: red;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: red;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: red;  
+}
+
+:-ms-input-placeholder {  
+   color: red;  
+}
+
+.material-icons.md-40 { 
+	font-size: 40px;
+	margin-top: 8px;
+	margin-left: -5px;
+}
+
+</style>
+
+ <section class="slider">
+        <ul class="slides">
+            <li>
+                <img src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
+                <div class="caption center-align">
+                    <h3>Bring a life back to power</h3>
+                    <h5 class="light grey-text text-lighten-3">Make blood donation your responsibility</h5>
+                </div>
+
+            </li>            
+            <li>
+                <img src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
+                <div class="caption left-align">
+                    <h1 class="white-text text-darken-1">Be a <span class="red-text">Blood</span> HERO</h1>
+                    <h5 class="light pink-text text-darken-3">Donate your blood for a reason, let the reason to be life</h5>
+                </div>
+            </li>
+            <li>
+                <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
+                <div class="caption right-align mt-100">
+                    <h5>Donate your blood for a reason</h5>
+                    <h3 class="light grey-text text-lighten-3">let the reason to be <strong>LIFE</strong></h3>
+                </div>
+            </li>
+            <li>
+                <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
+                <div class="caption left-align">
+                    <h3>Spread your RED</h3>
+                    <h5 class="light grey-text text-lighten-3">The finest gesture one can make is to save life by donating Blood</h5>
+                </div>
+            </li>
+
+        </ul>
+
+       
+        <!-- the search box for searching of events -->
+	  	<div class="row search_slider">
+	  		<a href="#"><i class="material-icons md-40">search</i></a>
+		    <div class="col s3">
+		        <div class="search">
+		            <div class="search-wrapper card hoverable" ng-init="init()">
+		                <input id="search" class="validate" placeholder="search" ng-model="searchText">
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+    </section>
+
+
+    <!-- <div ng-controller="displayCtrl" ng-init="starts()"></div> -->
+
+    <div class="row" ng-controller="displayCtrl" ng-init="showEvents()">
+		<div class="col s4" ng-repeat="event in events | filter:searchText">
+
+			<div class="card blue-grey darken-1 hoverable">
+	            <div class="card-content white-text">
+	              <div class="card-title thin center-align">{{ event.name }}</div>
+						<h5 class="thin"> {{ event.location }} </h5>
+						<br>
+						<p class="thin">  {{ event.description }} </p>
+	          <br>
+	          <p class="thin"> {{ event.time }} </p>
+	          <br>
+	          <p class="thin"> {{ event.date }} </p>
+						<div class="card-action">
+	              			<a href="#" ng-click="clickEvents(event)">Click to join</a>
+	                    <a href="#" ng-click="clickSponsors(event)">Click to sponsor</a>
+	           			 </div>
+				</div>
+	        </div>
+		</div>
+</div>
+
+
+
+    <script>
+    	$(document).ready(function() {
+ 	console.log('home.html works');
+ 	$('.slider').slider({full_width: true});
+ });
+
+    </script>
