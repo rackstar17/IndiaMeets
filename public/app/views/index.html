@@ -8,24 +8,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<style>
-	body {
-		background-color: #eeeeee;
-	}
-</style>
 
 </head>
 <body ng-controller="mainCtrl as main">
 
 <header>
-
-	<nav class="teal darken-4 red-text" role="navigation">
+<div class="navbar-fixed">
+	<nav class="teal darken-4 fixed red-text" role="navigation">
     <div class="nav-wrapper">
       <a href="/" class="brand-logo"> &nbsp &nbsp India Meets</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         		<li ng-if="main.loggedIn"><a href="/addevent">Add event</a></li>
 				<!-- <li ><a href="/displayevents">Events</a></li> -->
-				<li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+				<li ng-if="!main.loggedIn"><a href="/" ng-click="openModal()">Login</a></li>
 				<li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
 				<li ng-if="main.loggedIn"><a href="#">Hello {{ main.user.username }}</a></li>
 				<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
@@ -33,6 +28,33 @@
     </div>
   </nav>
 
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet" style="height:100%;">
+    <div class="modal-content">
+      <h3 class="thin red-text center-align">Login</h3>
+      
+      <div class="row">
+      	
+
+      	<div class="input-field col s6">
+          <input id="username" type="text" class="validate" ng-model="main.loginData.username">
+          <label for="username">Username</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="password" type="password" class="validate" ng-model="main.loginData.password">
+          <label for="password">Password</label>
+        </div>
+
+      </div>
+      
+      <div>	
+      <a class="waves-effect waves-light btn-large red darken-2" style="margin-left:550px;" ng-click="main.doLogin()"><i class="mdi-content-send right"></i>Submit</a>
+      </div>
+    </div>
+  </div>
 
 </header>
 

@@ -1,7 +1,7 @@
 angular.module('main', [])
 
 
-.controller('mainCtrl', function($rootScope, $location, Auth) {
+.controller('mainCtrl', function($rootScope, $location,$window,Auth) {
 
 	var vm = this;
 
@@ -25,7 +25,11 @@ angular.module('main', [])
 
 		vm.error = '';
 
+		console.log(vm.loginData.username + vm.loginData.password);
+
 		Auth.login(vm.loginData.username, vm.loginData.password)
+
+
 			.success(function(data) {
 				vm.processing = false;
 
@@ -34,11 +38,13 @@ angular.module('main', [])
 						vm.user = data.data;
 					});
 
-				if(data.success)
+				if(data.success) {
+					$('#modal1').closeModal();
 					$location.path('/');
+					$window.location.reload();
+				}
 				else
-					vm.error =
-					 data.message;
+					vm.error = data.message;
 
 			});
 	}
@@ -49,6 +55,10 @@ angular.module('main', [])
 		 $location.path('/logout');
 	   
 		// $location.path('/');
+	}
+
+	$rootScope.openModal = function() {
+  		$('#modal1').openModal();   
 	}
 
 
