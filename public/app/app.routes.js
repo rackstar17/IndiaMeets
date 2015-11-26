@@ -9,9 +9,9 @@ angular.module('appRoutes', ['ngRoute'])
 			templateUrl: 'app/views/pages/home.html',
             controller: 'mainCtrl'
 		})
-		.when('/login', {
+		/*.when('/login', {
 			templateUrl: 'app/views/pages/login.html'
-		})
+		})*/
 
 
 		.when('/signup',{
