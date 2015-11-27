@@ -1,0 +1,47 @@
+	<style>
+
+	.eventheading {
+		width: 90%;
+		height: 100px;
+		background-color: #336;
+		border-radius: 5px;
+	}
+
+	.br100 {
+		border-radius: 100px;
+	}
+
+	</style>
+
+	<script>
+		$(document).ready(function() {
+			console.log('hello');
+		});
+	</script>
+
+</head>
+
+<div ng-controller="templateCtrl" ng-init="init()">
+	<div class="row eventheading">
+	<h1 class="center-align white-text thin" style="padding:15px;">Event Name</h1>
+	</div>
+
+
+	<div class="row" style="width:90%;">
+	    <div class="col s12">
+	      <ul class="tabs">
+	        <li class="tab col s3"><a href="#" ng-click="homeTabClick()" id="home">Home</a></li>
+	        <li class="tab col s3"><a href="#" ng-click="membersTabClick()" id="members">Members</a></li>
+	        <li class="tab col s3"><a href="#" ng-click="sponsorsTabClick()" id="sponsors">Sponsors</a></li>
+	        <li class="tab col s3"><a href="#" ng-click="photosTabClick()" id="photos">Photos</a></li>
+	      </ul>
+	    </div>
+	    <div ng-if="homeClicked()" class="col s12">Home</div>
+	    <div ng-if="membersClicked()" class="col s12">Members</div>
+	    <div ng-if="sponsorsClicked()" class="col s12">Sponsors</div>
+	    <div ng-if="photosClicked()" class="col s12">Photos</div>
+	</div>
+
+
+</div>
+

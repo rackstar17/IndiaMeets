@@ -46,6 +46,11 @@ angular.module('appRoutes', ['ngRoute'])
 			templateUrl: 'app/views/pages/home.html',
 			controller: 'mainCtrl'
 		})
+
+		.when('/eventtemplate',{
+			templateUrl:'app/views/pages/eventtemplate.html',
+			controller: 'templateCtrl'
+		})
 				
 
 	$locationProvider.html5Mode(true);
