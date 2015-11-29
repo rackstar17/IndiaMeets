@@ -29,9 +29,9 @@ angular.module('appRoutes', ['ngRoute'])
            controller:'displayCtrl'
 		})
        
-        .when('/join',{
-          templateUrl:'app/views/pages/template.html',
-           controller:'joinCtrl'
+        .when('/view',{
+          templateUrl:'app/views/pages/eventtemplate.html',
+           controller:'viewCtrl'
 
 		})
      
@@ -45,11 +45,6 @@ angular.module('appRoutes', ['ngRoute'])
 		.when('/logout', {
 			templateUrl: 'app/views/pages/home.html',
 			controller: 'mainCtrl'
-		})
-
-		.when('/eventtemplate',{
-			templateUrl:'app/views/pages/eventtemplate.html',
-			controller: 'templateCtrl'
 		})
 				
 

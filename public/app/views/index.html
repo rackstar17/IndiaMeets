@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 </head>
 <body ng-controller="mainCtrl as main">
@@ -22,7 +22,7 @@
 				<!-- <li ><a href="/displayevents">Events</a></li> -->
 				<li ng-if="!main.loggedIn"><a href="/" ng-click="openModal()">Login</a></li>
 				<li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
-				<li ng-if="main.loggedIn"><a href="#">Hello {{ main.user.username }}</a></li>
+				<!-- <li ng-if="main.loggedIn"><a href="#">Hello {{ main.user.username }}</a></li> -->
 				<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
       </ul>
     </div>
@@ -79,9 +79,8 @@
 <script type="text/javascript" src="app/controllers/storyCtrl.js"></script>
 <script type="text/javascript" src="app/controllers/eventCtrl.js"></script>
 <script type="text/javascript" src="app/controllers/displayCtrl.js"></script>
-<script type="text/javascript" src="app/controllers/joinCtrl.js"></script>
 <script type="text/javascript" src="app/controllers/sponsorCtrl.js"></script>
-<script type="text/javascript" src="app/controllers/templateCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/viewCtrl.js"></script>
 
 
 <script type="text/javascript" src="app/app.routes.js"></script>

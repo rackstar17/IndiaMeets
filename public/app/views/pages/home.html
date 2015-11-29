@@ -57,6 +57,10 @@
 	margin-top:180px;
 }
 
+.br100 {
+    border-radius: 100px;
+}
+
 </style>
 
  <section class="slider">
@@ -112,21 +116,16 @@
     <div class="row" ng-controller="displayCtrl" ng-init="showEvents()">
 		<div class="col s4" ng-repeat="event in events | filter:searchText">
 
-			<div class="card blue-grey darken-1 hoverable">
-	            <div class="card-content white-text">
-	              <div class="card-title thin center-align">{{ event.name }}</div>
-						<h5 class="thin"> {{ event.location }} </h5>
-						<br>
-						<p class="thin">  {{ event.description }} </p>
-	          <br>
-	          <p class="thin"> {{ event.time }} </p>
-	          <br>
-	          <p class="thin"> {{ event.date }} </p>
-						<div class="card-action">
-	              			<a href="#" ng-click="clickEvents(event)">Click to join</a>
-	                    <a href="#" ng-click="clickSponsors(event)">Click to sponsor</a>
-	           			 </div>
-				</div>
+			<div class="card hoverable">
+                <div class="card-image">
+                    <img ng-src="{{event.imagepath}}">
+                    <span class="card-title"> {{ event.name }} </span>
+                </div>
+
+
+                <div class="card-action center-align">
+                    <a href="#" ng-click="clickEvents(event)" class="waves-effect waves-light btn-large red darken-2 white-text br100">View<i class="mdi-content-send right"></i></a>
+                </div>
 	        </div>
 		</div>
 </div>

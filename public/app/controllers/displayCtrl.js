@@ -5,7 +5,7 @@ angular.module('display',[])
 	$scope.events = [];
 
 	$scope.clickEvents = function(data) {
-		console.log(data.name + " " + data.category + " " + data.members);
+		console.log(data.name);
 		localStorage.setItem("clickedEventId",data._id);
 		localStorage.setItem("clickedEventName",data.name);
 		localStorage.setItem("clickedEventCreator",data.creator);
@@ -13,11 +13,12 @@ angular.module('display',[])
 		localStorage.setItem("clickedEventDate",data.date);
 		localStorage.setItem("clickedEventTime",data.time);
 		localStorage.setItem("clickedEventLocation",data.location);
-		$location.path('/join');
+		localStorage.setItem("clickedEventImagepath",data.imagepath);
+		$location.path('/view');
 	}
 
 
-	$scope.clickSponsors = function(data) {
+	/*$scope.clickSponsors = function(data) {
 		console.log(data.name + " " + data.category + " " + data.members);
 		localStorage.setItem("clickedEventId",data._id);
 		localStorage.setItem("clickedEventName",data.name);
@@ -26,8 +27,9 @@ angular.module('display',[])
 		localStorage.setItem("clickedEventDate",data.date);
 		localStorage.setItem("clickedEventTime",data.time);
 		localStorage.setItem("clickedEventLocation",data.location);
+		localStorage.setItem("clickedEventImagepath",data.imagepath);
 		$location.path('/addsponsor');
-	}
+	}*/
 
 
 	$scope.showEvents = function() {

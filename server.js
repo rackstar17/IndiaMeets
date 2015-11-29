@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 
-app.use(express.static(__dirname +'/public'));
+app.use(express.static(__dirname +"/public"));
 
 var api=require('./app/routes/api')(app,express);
 app.use('/api',api);

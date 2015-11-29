@@ -10,8 +10,10 @@ angular.module('event',[])
         date:"" ,
         location:"" ,
         description:"" ,
-        time:""
+        time:"" ,
+        imagepath:""
     };
+
 
     $scope.addEvent = function() {
         console.log($scope.events);

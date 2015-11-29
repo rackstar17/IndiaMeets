@@ -9,11 +9,13 @@ var events =new Schema ({
 	 creator:String,
 	 name:String,
 	 description :String,
-	 date: {type:Date, defauly:Date.now},
+	 date: {type:Date, default:Date.now},
      time:String,
      location:String,
      join:Array,
-     sponsor:Array
+     interested:Array,
+     sponsor:Array ,
+     imagepath: String 
 });
 
 

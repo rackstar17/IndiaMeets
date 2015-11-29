@@ -2,6 +2,7 @@ var User =require('../models/user');
 var Story=require('../models/story'); 
 var events=require('../models/events');
 var config=require('../../config');
+var fs = require('fs');
 
 var secretKey=config.secretKey;
 
@@ -190,8 +191,8 @@ module.exports =  function(app,express){
               date: req.body.date,
              time: req.body.time,
              location:req.body.location,
+             imagepath:req.body.imagepath
           });
-
 
           event.save(function(err){
               if(err){
@@ -202,50 +203,8 @@ module.exports =  function(app,express){
                  res.json({ message:"New Story Created" , user: loggedInUser }); 
           });
         })
-  
-
-      // api.route('/')
-
-      //   .post(function(req,res){
-
-      //     var story =new Story({
-
-      //        creator :req.decoded.id,
-      //        content :req.body.content,
-      //     });
-
-
-      //     story.save(function(err){
-      //         if(err){
-      //           res.send(err);
-      //           return
-      //         }
-
-      //            res.json({ message:"New Story Created"}); 
-      //     });
-      //   })
-
-
-      //   .get(function(req,res){
-
-      //     Story.find({creator :req.decoded.id}, function(err,stories){
-
-      //       if(err){
-      //         res.send(err);
-      //         return;
-      //       }
-
-      //          res.json(stories);
-      //     }); 
-
-      //   });
-
-      // api.get('/me',function(req,res){
-      //       res.json(req.decoded);
-      // });
     
 
       return api ;
-
 
 } 

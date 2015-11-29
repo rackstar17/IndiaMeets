@@ -18,6 +18,8 @@ angular.module('main', [])
 			});
 	});
 
+	$rootScope.temppath = "/app/views/pages/images/bayern.jpeg";
+
 
 	vm.doLogin = function() {
 

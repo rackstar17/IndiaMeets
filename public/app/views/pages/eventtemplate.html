@@ -1,9 +1,8 @@
 	<style>
 
 	.eventheading {
-		width: 90%;
-		height: 100px;
-		background-color: #336;
+		width: 100%;
+		height: 420px;
 		border-radius: 5px;
 	}
 
@@ -18,18 +17,78 @@
 
 	</style>
 
+
 	<script>
 		$(document).ready(function() {
-			console.log('hello');
+			console.log('maps to be initialized');
+			var map;
+		    var geocoder;
+		    var latitude,longitude;
+		    var address;
+		    var lati,longi;
+
+		    function InitializeMap() {
+
+		        var latlng = new google.maps.LatLng(-34.397, 150.644);
+		        var myOptions =
+		        {
+		            zoom: 8,
+		            center: latlng,
+		            mapTypeId: google.maps.MapTypeId.ROADMAP,
+		            disableDefaultUI: true
+		        };
+		        map = new google.maps.Map(document.getElementById("map"), myOptions);
+		    }
+
+		    function FindLocaiton() {
+		        geocoder = new google.maps.Geocoder();
+		        InitializeMap();
+
+		        var markeraddress = localStorage.getItem('clickedEventLocation');
+		        console.log(markeraddress);
+		        geocoder.geocode( { 'address': markeraddress}, function(results, status) {
+
+		          if (status == google.maps.GeocoderStatus.OK) {
+		             latitude = results[0].geometry.location.lat();
+		             longitude = results[0].geometry.location.lng();
+
+		             /*console.log(latitude + ' ' + longitude);*/
+		             console.log(typeof(latitude) + ' ' + typeof(longitude));
+		             lati = latitude.toString();
+		             longi = longitude.toString();
+		          } 
+		        });
+
+		        address = lati + ' ' + longi;
+		        console.log(address);
+		        geocoder.geocode({ 'address': address }, function (results, status) {
+		            if (status == google.maps.GeocoderStatus.OK) {
+		                map.setCenter(results[0].geometry.location);
+		                var marker = new google.maps.Marker({
+		                    map: map,
+		                    position: results[0].geometry.location
+		                });
+
+		            }
+		            else {
+		                alert("Geocode was not successful for the following reason: " + status);
+		            }
+		        });
+		    }
+
+		    FindLocaiton();
+
 		});
 	</script>
 
 </head>
 
-<div ng-controller="templateCtrl" ng-init="init()">
-	<div class="row eventheading">
-	<h1 class="center-align white-text thin" style="padding:15px;">Event Name</h1>
+<div ng-controller="viewCtrl" ng-init="init()">
+	<!-- <h1 class="center-align white-text thin" style="padding:15px;"> {{ clickedEvent.name }} </h1> -->
+	<div class="row wd90">
+		<img ng-src="{{clickedEvent.imagepath}}" class="eventheading">
 	</div>
+	
 
 
 	<div class="row wd90">
@@ -53,8 +112,8 @@
 		<div class="col s3">
 			<div class="card">
 				<div class="card-content">
-					<h4 class="thin">Noida, India</h4>
-					<p class="thin">Founded 10 December 2015</p>
+					<h4 class="thin"> {{ clickedEvent.location }} </h4>
+					<p class="thin">Date: {{ clickedEvent.date }} </p>
 					<br>
 					<hr style="color: white;background-color: white;">
 					<br>
@@ -65,7 +124,7 @@
 					<h4 class="thin">Organizer:</h4>
 					<div class="row">
 						<div class="col s2"><img src="#"></div>
-						<div class="col s10"><p class="thin">Himanshu Aggarwal</p></div>
+						<div class="col s10"><p class="thin"> {{ clickedEvent.creator }} </p></div>
 					</div>
 					<hr style="color: white;background-color: white;">
 					<br>
@@ -91,7 +150,27 @@
 		<div class="col s6">
 			<div class="card">
 				<div class="card-content">
-					<h1 class="thin">This is where the magic happens</h1>
+
+					<div ng-if="homeClicked()">
+						<h2 class="blue-grey-text"> {{ clickedEvent.name }} </h2>
+						<p> {{ clickedEvent.description }} </p>
+
+						<div id="map"></div>
+
+					</div>
+
+					<div ng-if="membersClicked()">
+						
+					</div>
+
+					<div ng-if="sponsorsClicked()">
+						
+					</div>
+
+					<div ng-if="photosClicked()">
+						
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -101,7 +180,7 @@
 				<div class="card-content">
 					<h4 class="green-text">Want to go ?</h4>
 					<br>
-					<a class="waves-effect waves-light btn-large red darken-2" style="margin-left:22px;">Join<i class="mdi-content-send right"></i></a>
+					<a class="waves-effect waves-light btn-large red darken-2" style="margin-left:22px;">Join & RSVP<i class="mdi-content-send right"></i></a>
 					<br>
 					<br>
 					<hr style="color: white;background-color: white;">
@@ -148,4 +227,5 @@
 
 
 </div>
+
 
