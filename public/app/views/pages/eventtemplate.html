@@ -1,4 +1,6 @@
-	<style>
+<html>
+<head>
+	<style type="text/css">
 
 	.eventheading {
 		width: 100%;
@@ -15,73 +17,14 @@
 		width: 90%;
 	}
 
+	#map {
+		height: 10%;
+		width: 10%;
+	}
+
 	</style>
-
-
-	<script>
-		$(document).ready(function() {
-			console.log('maps to be initialized');
-			var map;
-		    var geocoder;
-		    var latitude,longitude;
-		    var address;
-		    var lati,longi;
-
-		    function InitializeMap() {
-
-		        var latlng = new google.maps.LatLng(-34.397, 150.644);
-		        var myOptions =
-		        {
-		            zoom: 8,
-		            center: latlng,
-		            mapTypeId: google.maps.MapTypeId.ROADMAP,
-		            disableDefaultUI: true
-		        };
-		        map = new google.maps.Map(document.getElementById("map"), myOptions);
-		    }
-
-		    function FindLocaiton() {
-		        geocoder = new google.maps.Geocoder();
-		        InitializeMap();
-
-		        var markeraddress = localStorage.getItem('clickedEventLocation');
-		        console.log(markeraddress);
-		        geocoder.geocode( { 'address': markeraddress}, function(results, status) {
-
-		          if (status == google.maps.GeocoderStatus.OK) {
-		             latitude = results[0].geometry.location.lat();
-		             longitude = results[0].geometry.location.lng();
-
-		             /*console.log(latitude + ' ' + longitude);*/
-		             console.log(typeof(latitude) + ' ' + typeof(longitude));
-		             lati = latitude.toString();
-		             longi = longitude.toString();
-		          } 
-		        });
-
-		        address = lati + ' ' + longi;
-		        console.log(address);
-		        geocoder.geocode({ 'address': address }, function (results, status) {
-		            if (status == google.maps.GeocoderStatus.OK) {
-		                map.setCenter(results[0].geometry.location);
-		                var marker = new google.maps.Marker({
-		                    map: map,
-		                    position: results[0].geometry.location
-		                });
-
-		            }
-		            else {
-		                alert("Geocode was not successful for the following reason: " + status);
-		            }
-		        });
-		    }
-
-		    FindLocaiton();
-
-		});
-	</script>
-
 </head>
+<body>
 
 <div ng-controller="viewCtrl" ng-init="init()">
 	<!-- <h1 class="center-align white-text thin" style="padding:15px;"> {{ clickedEvent.name }} </h1> -->
@@ -155,7 +98,7 @@
 						<h2 class="blue-grey-text"> {{ clickedEvent.name }} </h2>
 						<p> {{ clickedEvent.description }} </p>
 
-						<div id="map"></div>
+						
 
 					</div>
 
@@ -180,7 +123,7 @@
 				<div class="card-content">
 					<h4 class="green-text">Want to go ?</h4>
 					<br>
-					<a class="waves-effect waves-light btn-large red darken-2" style="margin-left:22px;">Join & RSVP<i class="mdi-content-send right"></i></a>
+					<a class="waves-effect waves-light btn-large red darken-2" style="margin-left:22px;" ng-click="">Join & RSVP<i class="mdi-content-send right"></i></a>
 					<br>
 					<br>
 					<hr style="color: white;background-color: white;">
@@ -225,7 +168,29 @@
 
 	</div>
 
+	<div class="row">
+		<div id="map"></div>
+	</div>
+	<script type="text/javascript">
+	var map;
+	function initMap() {
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: -34.397, lng: 150.644},
+	    zoom: 8
+	  });
+	}
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANpueeHvGKh4W8THwgFXdljGKKiOoQOvM&callback=initMap">
+</script>
 
 </div>
+
+
+
+
+</body>
+</html>
+
 
 
