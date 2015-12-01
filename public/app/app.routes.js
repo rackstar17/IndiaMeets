@@ -24,10 +24,10 @@ angular.module('appRoutes', ['ngRoute'])
 
 		})
         
-        .when('/displayevents',{
+        /*.when('/displayevents',{
           templateUrl:'app/views/pages/display.html',
            controller:'displayCtrl'
-		})
+		})*/
        
         .when('/view',{
           templateUrl:'app/views/pages/eventtemplate.html',

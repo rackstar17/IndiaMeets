@@ -19,9 +19,10 @@ angular.module('view',[])
 			method:'POST' ,
 			data: $scope.clickedEvent ,
 			url: '/api/join'
-		}).then(function successCallback() {
+		}).then(function successCallback(response) {
+			console.log(response);
 			console.log("event joined");
-            $location.path('/displayevents');
+            //$location.path('/view');
 		},function errorCallback() {
 			console.log("sorry could not join the event");
 		});

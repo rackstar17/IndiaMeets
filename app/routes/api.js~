@@ -114,9 +114,8 @@ module.exports =  function(app,express){
      
 
              api.post('/joined',function(req,res){
-              console.log(req.body.name);
   
-              events.find({'name':req.body.name}, function (err, even) {
+            events.find(req.body.name, function (err, even) {
   
          //   events.save(function(err){
               if(err){
