@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<style type="text/css">
@@ -17,12 +18,8 @@
 		width: 90%;
 	}
 
-	#map {
-		height: 10%;
-		width: 10%;
-	}
-
 	</style>
+
 </head>
 <body>
 
@@ -57,16 +54,13 @@
 				<div class="card-content">
 					<h4 class="thin"> {{ clickedEvent.location }} </h4>
 					<p class="thin">Date: {{ clickedEvent.date }} </p>
-					<br>
-					<hr style="color: white;background-color: white;">
-					<br>
-					<h5 class="thin">Current Members: 50</h5>
+					<p class="thin">Time: {{ clickedEvent.time }}</p>
 					<br>
 					<hr style="color: white;background-color: white;">
 					<br>
 					<h4 class="thin">Organizer:</h4>
 					<div class="row">
-						<div class="col s2"><img src="#"></div>
+						<div class="col s2"><i class="material-icons circle green">perm_identity</i></div>
 						<div class="col s10"><p class="thin"> {{ clickedEvent.creator }} </p></div>
 					</div>
 					<hr style="color: white;background-color: white;">
@@ -95,9 +89,14 @@
 				<div class="card-content">
 
 					<div ng-if="homeClicked()">
-						<h2 class="blue-grey-text"> {{ clickedEvent.name }} </h2>
-						<p> {{ clickedEvent.description }} </p>
+						<div class="row">
+							<h2 class="blue-grey-text"> {{ clickedEvent.name }} </h2>
+							<p> {{ clickedEvent.description }} </p>
+						</div>
 
+					<div class="row">
+							<a class="waves-effect waves-light btn-large red darken-2" style="margin-left:25%;" onclick="getLatLng()">View Location on Map<i class="mdi-content-send right"></i></a>
+					</div>
 						
 
 					</div>
@@ -120,46 +119,19 @@
 
 		<div class="col s3">
 			<div class="card">
-				<div class="card-content">
+				<div class="card-content" style="margin-top:5%;">
 					<h4 class="green-text">Want to go ?</h4>
 					<br>
 					<a class="waves-effect waves-light btn-large red darken-2" style="margin-left:22px;" ng-click="joinEvent()">Join & RSVP<i class="mdi-content-send right"></i></a>
 					<br>
 					<br>
 					<hr style="color: white;background-color: white;">
-					<h3 class="thin"> going</h3>
+					<h3 class="thin"> {{ joiningArray }} going</h3>
 					<ul class="collection">
-					    <li class="collection-item avatar">
-					      <img src="images/yuna.jpg" alt="" class="circle">
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="material-icons circle">folder</i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="material-icons circle green">insert_chart</i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="material-icons circle red">play_arrow</i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+					    <li class="collection-item avatar" ng-repeat="members in joiningMembersArray">
+					      <i class="material-icons circle green">perm_identity</i>
+					      <p style="margin-top:5%;"> {{ members.username }} </p>
+					      <a class="secondary-content"><i class="material-icons">grade</i></a>
 					    </li>
 					  </ul>
 				</div>
@@ -168,25 +140,28 @@
 
 	</div>
 
-	<div class="row">
-		<div id="map"></div>
-	</div>
-	<script type="text/javascript">
-	var map;
-	function initMap() {
-	  map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: -34.397, lng: 150.644},
-	    zoom: 8
-	  });
-	}
-</script>
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANpueeHvGKh4W8THwgFXdljGKKiOoQOvM&callback=initMap">
-</script>
 
 </div>
 
+<script type="text/javascript">
+	function getLatLng() {
 
+		var geocoder = new google.maps.Geocoder();
+		var address = localStorage.getItem('clickedEventLocation');
+
+		geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		    var latitude = results[0].geometry.location.lat();
+		    var longitude = results[0].geometry.location.lng();
+		    console.log(typeof(latitude) + ' ' + typeof(longitude));
+		    localStorage.setItem('adlat',latitude);
+		    localStorage.setItem('adlng',longitude);
+		    window.location.href = '/maps';
+		   } 
+		}); 
+
+	}
+</script>
 
 
 </body>

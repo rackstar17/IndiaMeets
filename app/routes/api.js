@@ -3,6 +3,7 @@ var Story=require('../models/story');
 var events=require('../models/events');
 var config=require('../../config');
 var fs = require('fs');
+var nodemailer = require('nodemailer');
 
 var secretKey=config.secretKey;
 
@@ -29,6 +30,13 @@ function createToken(user){
 module.exports =  function(app,express){
 
      var api = express.Router();
+     var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'rackstar17@gmail.com',
+            pass: '19951452'
+        }
+    });
  
      api.post('/signup',function(req,res){
 
@@ -65,6 +73,16 @@ module.exports =  function(app,express){
              res.json(users);
           });
      });
+
+     api.post('/locate', function(req,res) {
+        events.find({'location':req.body.location} ,function(err,events) {
+            if (err) {
+              res.send(err);
+              return;
+            }
+            res.json(events);
+        });
+     })
 
      
      api.post('/login',function(req,res){
@@ -121,7 +139,7 @@ module.exports =  function(app,express){
          //   events.save(function(err){
               if(err){
                 res.send(err);
-                return
+                return;
               }
 
                  res.json(even); 
@@ -175,11 +193,34 @@ module.exports =  function(app,express){
                 return
               }
 
-                 res.json(req.user); 
+                 res.json(events); 
           });
 
             })
           
+        })
+
+        api.get('/sendemail', function(req,res) {
+            var mailOptions = {
+                from: 'rackstar17@gmail.com', // sender address
+                to: 'rackstar20@gmail.com', // list of receivers
+                subject: 'Hello ✔', // Subject line
+                text: 'Hello world ✔', // plaintext body
+                html: '<b>Hello world ✔</b>' // html body
+            };
+            transporter.sendMail(mailOptions, function(error, info){
+              if(error){
+                  return console.log(error);
+              }
+              console.log('Message sent: ' + info.response);
+              res.send('Message sent');
+
+          });
+
+        })
+
+        api.get('/getuserdetails', function(req,res) {
+          res.json(req.user);
         })
 
         api.post('/addsponsor',function(req,res){
